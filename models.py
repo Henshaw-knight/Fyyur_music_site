@@ -1,24 +1,16 @@
+#----------------------------------------------------------------------------#
+# Models.
+#----------------------------------------------------------------------------#
 from flask import Flask
-from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
+from flask_moment import Moment
 from flask_migrate import Migrate
-
-
-#----------------------------------------------------------------------------#
-# App Config.
-#----------------------------------------------------------------------------#
 
 app = Flask(__name__)
 moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
-# TODO: connect to a local postgresql database
-
-#----------------------------------------------------------------------------#
-# Models.
-#----------------------------------------------------------------------------#
 
 class Venue(db.Model):
     __tablename__ = 'venues'
@@ -39,9 +31,7 @@ class Venue(db.Model):
 
     def __repr__(self):
         return f'<Venue_id: {self.id}, name: {self.name}, shows: {self.shows}>' 
-
-
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate
+    
 
 class Artist(db.Model):
     __tablename__ = 'artists'
@@ -69,7 +59,4 @@ class Show(db.Model):
     start_time = db.Column(db.String(120), nullable=False)
     artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
     venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'), nullable=False)
-    
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate
-
-# TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
+   
