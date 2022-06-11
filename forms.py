@@ -16,7 +16,8 @@ class ShowForm(Form):
         default= datetime.today()
     )
 
-class VenueForm(Form):
+class VenueForm(Form):   
+
     name = StringField(
         'name', validators=[DataRequired()]
     )
@@ -83,13 +84,14 @@ class VenueForm(Form):
         'address', validators=[DataRequired()]
     )
     phone = StringField(
-        'phone'
+        'phone',
+        validators=[DataRequired()] 
+
     )
     image_link = StringField(
         'image_link'
     )
-    genres = SelectMultipleField(
-        # TODO implement enum restriction
+    genres = SelectMultipleField(       
         'genres', validators=[DataRequired()],
         choices=[
             ('Alternative', 'Alternative'),
@@ -117,7 +119,7 @@ class VenueForm(Form):
         'facebook_link', validators=[URL()]
     )
     website_link = StringField(
-        'website_link'
+        'website_link', validators=[URL()]
     )
 
     seeking_talent = BooleanField( 'seeking_talent' )
@@ -191,9 +193,8 @@ class ArtistForm(Form):
             ('WY', 'WY'),
         ]
     )
-    phone = StringField(
-        # TODO implement validation logic for state
-        'phone'
+    phone = StringField(        
+        'phone', validators=[DataRequired()]
     )
     image_link = StringField(
         'image_link'
@@ -222,13 +223,12 @@ class ArtistForm(Form):
             ('Other', 'Other'),
         ]
      )
-    facebook_link = StringField(
-        # TODO implement enum restriction
+    facebook_link = StringField(        
         'facebook_link', validators=[URL()]
      )
 
     website_link = StringField(
-        'website_link'
+        'website_link', validators=[URL()]
      )
 
     seeking_venue = BooleanField( 'seeking_venue' )
